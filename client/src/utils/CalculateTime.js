@@ -1,9 +1,11 @@
 export const calculateTime = (inputDateStr) => {
-
+  // Assuming the input date string is in UTC format
   const inputDate = new Date(inputDateStr);
 
+  // Get current date
   const currentDate = new Date();
 
+  // Set up date formats
   const timeFormat = { hour: "numeric", minute: "numeric" };
   const dateFormat = {
     day: "2-digit",
@@ -11,12 +13,13 @@ export const calculateTime = (inputDateStr) => {
     year: "numeric",
   };
 
+  // Check if it's today, tomorrow, or more than one day ago
   if (
     inputDate.getUTCDate() === currentDate.getUTCDate() &&
     inputDate.getUTCMonth() === currentDate.getUTCMonth() &&
     inputDate.getUTCFullYear() === currentDate.getUTCFullYear()
   ) {
-
+    // Today: Convert to AM/PM format
     const ampmTime = inputDate.toLocaleTimeString("en-US", timeFormat);
     return ampmTime;
   } else if (
@@ -24,7 +27,7 @@ export const calculateTime = (inputDateStr) => {
     inputDate.getUTCMonth() === currentDate.getUTCMonth() &&
     inputDate.getUTCFullYear() === currentDate.getUTCFullYear()
   ) {
-
+    // Tomorrow: Show "Yesterday"
 
     return "Yesterday";
   } else if (
@@ -51,7 +54,7 @@ export const calculateTime = (inputDateStr) => {
 
     return targetDay;
   } else {
-
+    // More than 7 days ago: Show date in DD/MM/YYYY format
     const formattedDate = inputDate.toLocaleDateString("en-GB", dateFormat);
     return formattedDate;
   }
